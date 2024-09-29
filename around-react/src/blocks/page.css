@@ -1,0 +1,26 @@
+.page {
+  background-color: #000;
+  margin: 0;
+  padding: 0 200px;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .page {
+    padding: 0 8%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page {
+    padding: 0;
+  }
+}

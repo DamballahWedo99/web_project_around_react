@@ -1,0 +1,32 @@
+.header__container {
+  display: flex;
+  padding-bottom: 41px;
+  border-bottom: 0.02vw solid #fff;
+  margin-top: 45px;
+}
+
+.header__image {
+  width: 13vw;
+}
+
+@media screen and (max-width: 768px) {
+  .header__container {
+    padding-bottom: 4vh;
+  }
+
+  .header__image {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header__container {
+    padding-bottom: 32px;
+    margin-top: 28px;
+  }
+
+  .header__image {
+    width: 40%;
+    margin-left: 10vw;
+  }
+}
