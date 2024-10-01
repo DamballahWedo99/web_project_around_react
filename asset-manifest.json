@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/web_project_around_react/static/css/main.337eefaf.css",
+    "main.js": "/web_project_around_react/static/js/main.bf0e05b9.js",
+    "static/js/453.e0c4eb1c.chunk.js": "/web_project_around_react/static/js/453.e0c4eb1c.chunk.js",
+    "static/media/Inter-Black.ttf": "/web_project_around_react/static/media/Inter-Black.83d81b169bedf85385f2.ttf",
+    "static/media/Inter-Regular.ttf": "/web_project_around_react/static/media/Inter-Regular.9ca9ba81e9dcaa12b3a1.ttf",
+    "static/media/trash.svg": "/web_project_around_react/static/media/trash.838c268f3a91b38909a8b00bae9eeeb1.svg",
+    "static/media/corazon-inactivo.svg": "/web_project_around_react/static/media/corazon-inactivo.3826c074a1b94b101e38893244f97c31.svg",
+    "index.html": "/web_project_around_react/index.html",
+    "static/media/corazon-activo.svg": "/web_project_around_react/static/media/corazon-activo.226461bd64622361ffb2.svg",
+    "static/media/cross.svg": "/web_project_around_react/static/media/cross.d86bb2edc2f6eadb96b785d29c82b56e.svg",
+    "main.337eefaf.css.map": "/web_project_around_react/static/css/main.337eefaf.css.map",
+    "main.bf0e05b9.js.map": "/web_project_around_react/static/js/main.bf0e05b9.js.map",
+    "453.e0c4eb1c.chunk.js.map": "/web_project_around_react/static/js/453.e0c4eb1c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.337eefaf.css",
+    "static/js/main.bf0e05b9.js"
+  ]
+}
