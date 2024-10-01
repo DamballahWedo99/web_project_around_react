@@ -1,9 +1,28 @@
-import profilePicture from "../images/avatar-profile-picture.jpg";
 import editProfilePicture from "../images/edit-profile-picture.png";
 import editProfileButton from "../images/edit-button.png";
 import addCardButton from "../images/cross.svg";
+import api from "../utils/api";
+import { useEffect, useState } from "react";
+import Card from "./Card";
 
 function Main(props) {
+  const [userName, setUserName] = useState("");
+  const [userAbout, setUserAbout] = useState("");
+  const [userAvatar, setUserAvatar] = useState(null);
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    api.getUser().then((userData) => {
+      setUserName(userData.name);
+      setUserAbout(userData.about);
+      setUserAvatar(userData.avatar);
+    });
+
+    api.getInitialCards().then((cards) => {
+      setCards(cards);
+    });
+  }, []);
+
   return (
     <main className="content">
       <section className="profile">
@@ -12,14 +31,14 @@ function Main(props) {
             className="profile__avatar-container"
             onClick={props.onEditAvatarClick}
           >
-            <img className="profile__avatar" src={profilePicture} />
+            <img className="profile__avatar" src={userAvatar} />
             <div className="profile__avatar-icon">
               <img src={editProfilePicture} alt="Ícono" />
             </div>
           </div>
           <div className="profile__info">
-            <h1 className="profile__name">Jacques Cousteau</h1>
-            <h2 className="profile__job">Explorador</h2>
+            <h1 className="profile__name">{userName}</h1>
+            <h2 className="profile__job">{userAbout}</h2>
             <img
               className="profile__edit-button"
               src={editProfileButton}
@@ -40,20 +59,11 @@ function Main(props) {
         </div>
       </section>
 
-      {/* <section className="popup" id="popup-image">
-        <div className="popup__container popup__container_image">
-          <img
-            className="popup__close-icon"
-            id="image-close-icon"
-            src=""
-            alt="Ícono para cerrar el formulario"
-          />
-          <img className="popup__image" src="" alt="imagen" />
-          <h2 className="popup__image-title">título</h2>
-        </div>
-      </section> */}
-
-      <section className="elements"></section>
+      <section className="elements">
+        {cards.map((card) => (
+          <Card card={card} key={card._id} onCardClick={props.onCardClick} />
+        ))}
+      </section>
     </main>
   );
 }

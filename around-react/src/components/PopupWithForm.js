@@ -19,7 +19,7 @@ function PopupWithForm(props) {
         <form
           className="popup__form"
           id={`popup__form_${props.name}`}
-          novalidate
+          noValidate
         >
           <fieldset className="popup__info-field">
             {props.children}

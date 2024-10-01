@@ -23,14 +23,6 @@ class Api {
     return this._request(`${this._baseUrl}/users/me`);
   }
 
-  setUserInfo() {
-    return this._request(`${this._baseUrl}/users/me`).then((userData) => {
-      document.querySelector(".profile__name").textContent = userData.name;
-      document.querySelector(".profile__job").textContent = userData.about;
-      document.querySelector(".profile__avatar").src = userData.avatar;
-    });
-  }
-
   modUserInfo(name, about) {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
@@ -84,3 +76,5 @@ const api = new Api({
     "Content-Type": "application/json",
   },
 });
+
+export default api;

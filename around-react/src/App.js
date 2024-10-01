@@ -2,12 +2,18 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Main from "./components/Main";
 import PopupWithForm from "./components/PopupWithForm";
+import ImagePopup from "./components/ImagePopup";
 import { useState } from "react";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [cardSelected, setCardSelected] = useState(null);
+
+  const handlerCardClick = (card) => {
+    setCardSelected(card);
+  };
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(true);
@@ -25,6 +31,7 @@ function App() {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setCardSelected(null);
   };
 
   return (
@@ -34,6 +41,7 @@ function App() {
         onEditAvatarClick={handleEditAvatarClick}
         onEditProfileClick={handleEditProfileClick}
         onAddPlaceClick={handleAddPlaceClick}
+        onCardClick={handlerCardClick}
       />
       <Footer />
 
@@ -43,7 +51,7 @@ function App() {
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
       >
-        <label className="popup__label" for="name">
+        <label className="popup__label" htmlFor="name">
           <input
             className="popup__input"
             type="text"
@@ -51,12 +59,12 @@ function App() {
             name="name"
             placeholder="Nombre"
             required
-            minlength="2"
-            maxlength="40"
+            minLength="2"
+            maxLength="40"
           />
           <span className="popup__input-error name-error"></span>
         </label>
-        <label className="popup__label" for="about">
+        <label className="popup__label" htmlFor="about">
           <input
             className="popup__input"
             type="text"
@@ -64,8 +72,8 @@ function App() {
             name="about"
             placeholder="Acerca de mí"
             required
-            minlength="2"
-            maxlength="200"
+            minLength="2"
+            maxLength="200"
           />
           <span className="popup__input-error about-error"></span>
         </label>
@@ -77,7 +85,7 @@ function App() {
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       >
-        <label className="popup__label" for="image-update">
+        <label className="popup__label" htmlFor="image-update">
           <input
             className="popup__input"
             type="url"
@@ -96,7 +104,7 @@ function App() {
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       >
-        <label className="popup__label" for="title">
+        <label className="popup__label" htmlFor="title">
           <input
             className="popup__input"
             type="text"
@@ -104,12 +112,12 @@ function App() {
             name="name"
             placeholder="Título"
             required
-            minlength="2"
-            maxlength="30"
+            minLength="2"
+            maxLength="30"
           />
           <span className="popup__input-error title-error"></span>
         </label>
-        <label className="popup__label" for="image-url">
+        <label className="popup__label" htmlFor="image-url">
           <input
             className="popup__input"
             type="url"
@@ -122,12 +130,14 @@ function App() {
         </label>
       </PopupWithForm>
 
-      <PopupWithForm
+      <ImagePopup onClose={closeAllPopups} card={cardSelected} />
+
+      {/* <PopupWithForm
         name="delete-warning"
         title="¿Estás seguro?"
         buttonText="Si"
         onClose={closeAllPopups}
-      ></PopupWithForm>
+      ></PopupWithForm> */}
     </>
   );
 }
