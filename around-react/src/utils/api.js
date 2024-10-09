@@ -23,7 +23,7 @@ class Api {
     return this._request(`${this._baseUrl}/users/me`);
   }
 
-  modUserInfo(name, about) {
+  setUserInfo(name, about) {
     return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       body: JSON.stringify({ name, about }),
@@ -47,15 +47,9 @@ class Api {
     });
   }
 
-  addLike(cardId) {
+  changeLikeCardStatus(cardId, isLiked) {
     return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "PUT",
-    });
-  }
-
-  removeLike(cardId) {
-    return this._request(`${this._baseUrl}/cards/${cardId}/likes`, {
-      method: "DELETE",
+      method: isLiked ? "PUT" : "DELETE",
     });
   }
 
@@ -63,8 +57,6 @@ class Api {
     return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
       body: JSON.stringify({ avatar }),
-    }).then((data) => {
-      document.querySelector(".profile__avatar").src = data;
     });
   }
 }

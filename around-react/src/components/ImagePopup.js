@@ -1,10 +1,33 @@
+import { useEffect } from "react";
 import closeIcon from "../images/close-icon.png";
 
 function ImagePopup(props) {
+  function handleOutsideClickClose(e) {
+    if (!e.target.closest(".popup__container")) {
+      props.onClose();
+    }
+  }
+
+  useEffect(() => {
+    if (props.card) {
+      document.addEventListener("keydown", handleEscClose);
+    }
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  });
+
+  function handleEscClose(e) {
+    if (e.key === "Escape") {
+      props.onClose();
+    }
+  }
+
   return (
     <section
       className={`popup ${props.card ? "popup_opened" : ""}`}
       id="popup-image"
+      onClick={handleOutsideClickClose}
     >
       <div className="popup__container popup__container_image">
         <img
