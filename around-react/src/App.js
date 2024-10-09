@@ -12,12 +12,15 @@ import { CurrentUserContext } from "./contexts/CurrentUserContext";
 import { IsRenderingContext } from "./contexts/IsRenderingContext";
 
 function App() {
-  // Popup *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAlertPopupOpen, setIsAlertPopupOpen] = useState(false);
   const [cardSelected, setCardSelected] = useState(null);
+  const [cards, setCards] = useState([]);
+  const [cardToDelete, setCardToDelete] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
+  const [isRendering, setIsRendering] = useState(false);
 
   const handlerCardClick = (card) => {
     setCardSelected(card);
@@ -43,9 +46,6 @@ function App() {
     setCardSelected(null);
     setCardToDelete(null);
   };
-
-  // User *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
     api.getUser().then((userInfo) => {
@@ -78,10 +78,6 @@ function App() {
         closeAllPopups();
       });
   }
-
-  //Cards *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-  const [cards, setCards] = useState([]);
-  const [cardToDelete, setCardToDelete] = useState(null);
 
   useEffect(() => {
     api.getInitialCards().then((cards) => {
@@ -128,10 +124,6 @@ function App() {
         renderHandler(false);
       });
   }
-
-  //Rendering *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-  const [isRendering, setIsRendering] = useState(false);
 
   function renderHandler(isRendering) {
     setIsRendering(isRendering);

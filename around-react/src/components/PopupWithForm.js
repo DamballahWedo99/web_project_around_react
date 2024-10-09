@@ -1,9 +1,32 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import closeIcon from "../images/close-icon.png";
 import { IsRenderingContext } from "../contexts/IsRenderingContext";
+import FormValidator from "../utils/FormValidator";
 
 function PopupWithForm(props) {
   const buttonText = props.buttonText || "Guardar";
+  const isRendering = useContext(IsRenderingContext);
+  const formRef = useRef(null);
+
+  const formSettings = {
+    inputSelector: ".popup__input",
+    fieldsetSelector: ".popup__info-field",
+    submitButtonSelector: ".popup__button",
+    inactiveButtonClass: "popup__button_disabled",
+    inputErrorClass: "popup__input_type_error",
+    errorClass: "popup__input-error_active",
+  };
+
+  useEffect(() => {
+    if (props.isOpen) {
+      const validator = new FormValidator(formSettings, ".popup__form");
+      validator.enableValidation();
+
+      return () => {
+        validator.resetValidation();
+      };
+    }
+  });
 
   function handleOutsideClickClose(e) {
     if (!e.target.closest(".popup__container")) {
@@ -26,8 +49,6 @@ function PopupWithForm(props) {
     }
   }
 
-  const isRendering = useContext(IsRenderingContext);
-
   return (
     <section
       className={`popup ${props.isOpen ? "popup_opened" : ""}`}
@@ -44,9 +65,9 @@ function PopupWithForm(props) {
         <h2 className="popup__title">{props.title}</h2>
         <form
           className="popup__form"
-          id={`popup__form_${props.name}`}
           noValidate
           onSubmit={props.onSubmit}
+          ref={formRef}
         >
           <fieldset className="popup__info-field">
             {props.children}
