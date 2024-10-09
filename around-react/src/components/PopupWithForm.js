@@ -26,7 +26,7 @@ function PopupWithForm(props) {
         validator.resetValidation();
       };
     }
-  });
+  }, [props.isOpen]);
 
   function handleOutsideClickClose(e) {
     if (!e.target.closest(".popup__container")) {
